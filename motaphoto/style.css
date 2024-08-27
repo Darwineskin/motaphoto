@@ -8,40 +8,61 @@ Version: 1.0
 */
 
 @font-face {
-    font-family: 'Matemasie';
-    src: url('fonts/Matemasie-Regular.woff2') format('woff2'),
-         url('fonts/Matemasie-Regular.woff') format('woff'),
-         url('fonts/Matemasie-Regular.ttf') format('truetype');
+    font-family: 'SpaceMono';
+    src: url('fonts/SpaceMono-Regular.woff2') format('woff2'),
+         url('fonts/SpaceMono-Regular.woff') format('woff'),
+         url('fonts/SpaceMono-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
-@font-face {
-    font-family: 'Matemasie';
-    src: url('fonts/Matemasie-Bold.woff2') format('woff2'),
-         url('fonts/Matemasie-Bold.woff') format('woff'),
-         url('fonts/Matemasie-Bold.ttf') format('truetype');
-    font-weight: bold;
-    font-style: normal;
+
+body{
+    margin : 0;
+    padding: 0;
 }
-
-
-
 
 a {
-    font-family: 'Matemasie', sans-serif;
+    font-family: 'SpaceMono', sans-serif;
 }
 
-.main-navigation {
-    background-color: #333;
-    padding: 10px;
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1440px;
+    height: 80px;
+    margin: 0 auto;
 }
 
 .main-menu {
-    list-style-type: none;
+    display: flex;
+    justify-content: flex-end;
     margin: 0;
     padding: 0;
+    list-style-type: none;
+    height: 100%;
+}
+
+.custom-logo {
+    width: 216px;
+    height: auto;
+    max-height: 14px;
+}
+
+.main-navigation {
+    padding: 10px;
+    flex-grow: 1;
     display: flex;
+    justify-content: flex-end;
+}
+.main-menu {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .main-menu li {
@@ -49,13 +70,14 @@ a {
 }
 
 .main-menu a {
-    color: #fff;
+    color: #000000;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 400;
+    font-size: 16px;
 }
 
 .main-menu a:hover {
-    text-decoration: underline;
+    font-weight: bold;
 }
 
 /* La Modale (cachée par défaut) */
@@ -72,7 +94,7 @@ a {
     background-color: rgba(0, 0, 0, 0.4); /* Couleur de fond semi-transparente */
 }
 
-/* Contenu de la Modale */
+/*  Modal */
 .modal-content {
     background-color: #fefefe;
     margin: 10% auto; /* Centré verticalement avec une marge de 10% en haut */
@@ -85,5 +107,67 @@ a {
     transform: translateY(-50%);
     top: 50%;
     position: relative;
+}
+
+/* footer */
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1440px;
+    height: 80px;
+    margin: 0 auto;
+    border-top: 1px solid #000000;
+}
+
+.footer-menu {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    list-style: none;
+}
+
+.footer-menu a {
+    color: #000000;
+    text-decoration: none;
+    padding: 10px;
+    font-size: 16px;
+}
+
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .main-navigation {
+        width: 100%;
+    }
+
+    .main-menu {
+        justify-content: flex-start; /* Alignement du menu à gauche sur les petits écrans */
+        flex-direction: column;
+    }
+
+    .main-menu li {
+        margin-left: 0;
+        margin-top: 10px; /* Espacement entre les éléments du menu sur mobile */
+    }
+    .custom-logo {
+        width: 150px; /* Ajustement du logo pour les petits écrans */
+        height: auto;
+    }
+
+    .footer-menu {
+        flex-direction: column;
+        gap: 10px; /* Réduit l'espacement entre les liens sur les petits écrans */
+    }
+
+    .footer-menu a {
+        font-size: 14px; /* Réduit légèrement la taille des liens sur les petits écrans */
+    }
 }
 
