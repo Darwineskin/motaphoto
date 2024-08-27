@@ -1,0 +1,89 @@
+/*
+Theme Name: motaphoto
+Theme URI: http://motaphoto.local
+Author: Darwine
+Author URI: http://motaphoto.com
+Description: motaphoto
+Version: 1.0
+*/
+
+@font-face {
+    font-family: 'Matemasie';
+    src: url('fonts/Matemasie-Regular.woff2') format('woff2'),
+         url('fonts/Matemasie-Regular.woff') format('woff'),
+         url('fonts/Matemasie-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Matemasie';
+    src: url('fonts/Matemasie-Bold.woff2') format('woff2'),
+         url('fonts/Matemasie-Bold.woff') format('woff'),
+         url('fonts/Matemasie-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+
+
+
+a {
+    font-family: 'Matemasie', sans-serif;
+}
+
+.main-navigation {
+    background-color: #333;
+    padding: 10px;
+}
+
+.main-menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.main-menu li {
+    margin-right: 20px;
+}
+
+.main-menu a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.main-menu a:hover {
+    text-decoration: underline;
+}
+
+/* La Modale (cachée par défaut) */
+
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4); /* Couleur de fond semi-transparente */
+}
+
+/* Contenu de la Modale */
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto; /* Centré verticalement avec une marge de 10% en haut */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%; /* Réduisez la largeur à 50% de l'écran */
+    max-width: 600px; /* Limitez la largeur maximale */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    border-radius: 8px; /* Ajoutez des coins arrondis */
+    transform: translateY(-50%);
+    top: 50%;
+    position: relative;
+}
+
