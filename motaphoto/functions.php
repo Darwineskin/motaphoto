@@ -11,7 +11,7 @@ function motaphoto_enqueue_styles() {
 add_action('wp_enqueue_scripts', 'motaphoto_enqueue_styles');
 
 //logo
-function mytheme_custom_logo_setup() {
+function motaphoto_custom_logo_setup() {
     $defaults = array(
         'height'      => 14,
         'width'       => 216,
@@ -20,7 +20,7 @@ function mytheme_custom_logo_setup() {
     );
     add_theme_support('custom-logo', $defaults);
 }
-add_action('after_setup_theme', 'mytheme_custom_logo_setup');
+add_action('after_setup_theme', 'motaphoto_custom_logo_setup');
 
 
 //  menus navigation
@@ -37,7 +37,7 @@ function add_contact_button_to_end_of_menu($items, $args) {
 // 
 if ($args->theme_location == 'main') {
 $contact_button = '<li class="menu-item contact-button">';
-    $contact_button .= '<a href="#" id="contact-button">CONTACT</a>';
+    $contact_button .= '<a href="#" data-open-modal="contact">CONTACT</a>';
     $contact_button .= '</li>';
 $items .= $contact_button; // end position
 }
@@ -45,5 +45,5 @@ return $items;
 }
 add_filter('wp_nav_menu_items', 'add_contact_button_to_end_of_menu', 10, 2);
 
-?>
+
 

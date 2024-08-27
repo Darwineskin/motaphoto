@@ -8,7 +8,7 @@
         ));
         ?>
     </nav>
-    
+    <?php get_template_part('template-parts/contact-modal'); ?>
 </footer>
 <?php wp_footer(); ?>
 </body>
