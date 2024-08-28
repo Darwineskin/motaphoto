@@ -88,7 +88,7 @@ header {
     font-weight: bold;
 }
 
-/* Contact Modal */
+/************** Contact Modal *******************/
 
 /* background modal */
 .contact-modal {
@@ -100,6 +100,17 @@ header {
     height: 100%;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+    display: none;
+}
+
+/* Show modal */
+.contact-modal.show {
+    opacity: 1;
+    visibility: visible;
+    display: block;
 }
 
 /* content modal */
@@ -112,6 +123,15 @@ header {
     max-width: 597px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     font-family: 'Poppins', sans-serif;
+    opacity: 0;
+    transform: translateY(-50px);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+/* Show modal content */
+.contact-modal.show .modal-content {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* close button modal */
@@ -165,13 +185,13 @@ header {
 .wpcf7 input[type="text"],
 .wpcf7 input[type="email"],
 .wpcf7 textarea {
-    width: 100%; /* Les champs prennent toute la largeur disponible */
-    padding: 10px; /* Espacement interne des champs */
-    margin: 10px 0; /* Espacement vertical entre les champs */
-    border: 1px solid #ddd; /* Bordure des champs */
-    border-radius: 8px; /* Bordure arrondie */
-    box-sizing: border-box; /* Inclut le padding dans la largeur totale */
-    font-size: 12px; /* Taille de la police */
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 12px;
 
 }
 .wpcf7 textarea {
@@ -183,7 +203,7 @@ header {
     width: 100%;
     padding: 8px 15px 8px 15px;
     background-color: #D8D8D8;
-    color: #000000; /* Couleur du texte */
+    color: #000000;
     border: none;
     cursor: pointer;
     font-size: 12px;
@@ -230,26 +250,26 @@ footer {
     }
 
     .main-menu {
-        justify-content: flex-start; /* Alignement du menu à gauche sur les petits écrans */
+        justify-content: flex-start;
         flex-direction: column;
     }
 
     .main-menu li {
         margin-left: 0;
-        margin-top: 10px; /* Espacement entre les éléments du menu sur mobile */
+        margin-top: 10px;
     }
     .custom-logo {
-        width: 150px; /* Ajustement du logo pour les petits écrans */
+        width: 150px;
         height: auto;
     }
 
     .footer-menu {
         flex-direction: column;
-        gap: 10px; /* Réduit l'espacement entre les liens sur les petits écrans */
+        gap: 10px;
     }
 
     .footer-menu a {
-        font-size: 14px; /* Réduit légèrement la taille des liens sur les petits écrans */
+        font-size: 14px;
     }
 }
 

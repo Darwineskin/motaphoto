@@ -3,22 +3,32 @@ document.addEventListener('DOMContentLoaded', function () {
     var openButtons = document.querySelectorAll('[data-open-modal="contact"]');
     var closeButton = document.querySelector('.contact-modal .close');
 
-    // Ouvrir la modale
+    // open modal
     openButtons.forEach(function(button) {
         button.addEventListener('click', function (event) {
             event.preventDefault();
             modal.style.display = 'block';
+            setTimeout(function() {
+                modal.classList.add('show');
+            }, 10);
         });
     });
 
-    // Fermer la modale
+    // close modal
     closeButton.addEventListener('click', function () {
-        modal.style.display = 'none';
+        modal.classList.remove('show');
     });
 
-    // Fermer la modale en cliquant à l'extérieur de celle-ci
+    // close modal on click on windows
     window.addEventListener('click', function (event) {
         if (event.target == modal) {
+            modal.classList.remove('show');
+        }
+    });
+
+    // hide modal when close
+    modal.addEventListener('transitionend', function () {
+        if (!modal.classList.contains('show')) {
             modal.style.display = 'none';
         }
     });
