@@ -1,25 +1,35 @@
-<?php
-/**
- * The template for displaying all single posts
- *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#single-post
- *
- * @package WordPress
- * @subpackage Twenty_Twenty_One
- * @since Twenty Twenty-One 1.0
- */
+<?php get_header(); ?>
 
-get_header();
+<main id="site-content" role="main">
 
-/* Start the Loop */
-while ( have_posts() ) :
-	the_post();
-	get_template_part( 'template-parts/content/content-page' );
+    <?php
+    // Start the loop to display the content
+    if ( have_posts() ) :
+        while ( have_posts() ) : the_post(); ?>
 
-	// If comments are open or there is at least one comment, load up the comment template.
-	if ( comments_open() || get_comments_number() ) {
-		comments_template();
-	}
-endwhile; // End of the loop.
+            <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-get_footer();
+                <!-- Display the title of the page -->
+                <header class="entry-header">
+                    <h1 class="entry-title"><?php the_title(); ?></h1>
+                </header>
+
+                <!-- Display the content of the page -->
+                <div class="entry-content">
+                    <?php the_content(); ?>
+                </div>
+
+            </article>
+
+        <?php endwhile;
+    else :
+        echo '<p>No content found</p>';
+    endif;
+    ?>
+
+</main><!-- #site-content -->
+
+
+<?php get_footer(); ?>
+
+
