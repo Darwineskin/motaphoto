@@ -1,12 +1,16 @@
 
 <?php
-// ajoute le css et le js
+
 function motaphoto_enqueue_styles() {
     
     wp_enqueue_style('style', get_stylesheet_uri());
 
     
     wp_enqueue_script('custom-modal-script', get_template_directory_uri() . '/js/scripts.js', array('jquery'), null, true);
+
+    wp_enqueue_script('photo-nav-script', get_template_directory_uri() . '/js/photo-nav.js', array('jquery'), null, true);
+
+    wp_enqueue_script('search-script', get_template_directory_uri() . '/js/search.js', array('jquery'), null, true);
 }
 add_action('wp_enqueue_scripts', 'motaphoto_enqueue_styles');
 
@@ -44,6 +48,30 @@ $items .= $contact_button; // end position
 return $items;
 }
 add_filter('wp_nav_menu_items', 'add_contact_button_to_end_of_menu', 10, 2);
+
+///////////////Add Api wordpress to filter
+
+function add_thumbnail_url_to_rest_api($data, $post, $request) {
+    // Check if the post has a featured image.
+    if (has_post_thumbnail($post->ID)) {
+        // Retrieve the URL of the featured image.
+        $thumbnail_id = get_post_thumbnail_id($post->ID);
+        $thumbnail_url = wp_get_attachment_image_url($thumbnail_id, 'medium');
+
+        // Add the image URL to the response.
+        $data->data['featured_media_src_url'] = $thumbnail_url;
+    } else {
+        // Si le post n'a pas d'image mise en avant, ajoutez une valeur nulle
+        $data->data['featured_media_src_url'] = null;
+    }
+
+    return $data;
+}
+
+// Apply the filter to the Custom Post Type 'photo'.
+add_filter('rest_prepare_photo', 'add_thumbnail_url_to_rest_api', 10, 3);
+
+
 
 
 

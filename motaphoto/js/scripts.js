@@ -1,12 +1,17 @@
 document.addEventListener('DOMContentLoaded', function () {
-    var modal = document.getElementById('contact-modal');
-    var openButtons = document.querySelectorAll('[data-open-modal="contact"]');
-    var closeButton = document.querySelector('.contact-modal .close');
+    const modal = document.getElementById('contact-modal');
+    const openButtons = document.querySelectorAll('[data-open-modal="contact"]');
+    const closeButton = document.querySelector('.contact-modal .close');
+    const referenceInput = document.querySelector('input[name="photo-reference"]');
 
     // open modal
     openButtons.forEach(function(button) {
         button.addEventListener('click', function (event) {
             event.preventDefault();
+
+            referenceInput.value = this.getAttribute('data-reference');
+
+
             modal.style.display = 'block';
             setTimeout(function() {
                 modal.classList.add('show');
@@ -33,4 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+
+
+
 
