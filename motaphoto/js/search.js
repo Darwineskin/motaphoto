@@ -1,18 +1,32 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const categoryFilter = document.getElementById('category-filter');
-    const formatFilter = document.getElementById('format-filter');
-    const galleryGrid = document.getElementById('gallery-grid');
-    const loadMoreButton = document.getElementById('load-more');
+jQuery(document).ready(function($) {
+    const galleryGrid = $('#gallery-grid');
+    const categoryFilter = $("#category-filter").select2({
+        minimumResultsForSearch: Infinity, /* Désactive la barre de recherche si non nécessaire */
+    });
+
+    const formatFilter = $("#format-filter").select2({
+        minimumResultsForSearch: Infinity, /* Désactive la barre de recherche si non nécessaire */
+    });
+
+    /* Listening change on category filter select2 */
+    categoryFilter.on('change', function () {
+        loadPhotos(true);
+    });
+
+    /* Listening change on format filter select2 */
+    formatFilter.on('change', function () {
+        loadPhotos(true);
+    })
 
     let paged = 1;
 
     function loadPhotos(reset = false) {
-        const category = categoryFilter.value;
-        const format = formatFilter.value;
+        const category = categoryFilter.val();
+        const format = formatFilter.val();
 
         if (reset) {
             paged = 1;
-            galleryGrid.innerHTML = ''; // Clear gallery
+            galleryGrid.html(''); // Clear gallery
         }
 
         let apiUrl = `${window.location.origin}/wp-json/wp/v2/photo?per_page=8&page=${paged}`;
@@ -25,43 +39,27 @@ document.addEventListener('DOMContentLoaded', function () {
             apiUrl += `&format_photo=${format}`;
         }
 
-        fetch(apiUrl)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Erreur dans la requête API');
-                }
-                return response.json();
-            })
-            .then(photos => {
-                if (photos.length > 0) {
-                    photos.forEach(photo => {
-                        console.log(photo);
-                        const galleryItem = document.createElement('div');
-                        galleryItem.classList.add('gallery-item');
-                        galleryItem.innerHTML = `
+        $.ajax({
+            url: apiUrl
+        })
+        .done(function( photos ) {
+            if (photos.length > 0) {
+                photos.forEach(photo => {
+                    console.log(photo);
+                    const galleryItem = $('<div></div>');
+                    galleryItem.addClass('gallery-item');
+                    galleryItem.html(`
                             <a href="${photo.link}">
                                 <img src="${photo.featured_media_src_url}" alt="${photo.title.rendered}">
-                                <h4>${photo.title.rendered}</h4>
-                            </a>`;
-                        galleryGrid.appendChild(galleryItem);
-                    });
+                            </a>`);
+                    galleryGrid.append(galleryItem);
+                });
 
-                    paged += 1;
-                    // loadMoreButton.style.display = 'block';
-                } else {
-                    // loadMoreButton.style.display = 'none';
-                }
-            })
-            .catch(error => console.error('Erreur:', error));
+                paged += 1;
+            } else {
+            }
+        });
     }
 
     loadPhotos();
-
-    // Reload the photos when changing the filter
-    categoryFilter.addEventListener('change', () => loadPhotos(true));
-    formatFilter.addEventListener('change', () => loadPhotos(true));
-
-    // Load more photos when the "Load More" button is clicked.
-    // loadMoreButton.addEventListener('click', () => loadPhotos());
 });
-

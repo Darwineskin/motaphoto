@@ -1,6 +1,17 @@
 
 <?php
 
+function enqueue_select2() {
+    // include CSS Select2
+    wp_enqueue_style('select2-css', get_template_directory_uri() . '/css/select2.min.css', array(), '1.0.1');
+
+
+    // include JS Select2
+    wp_enqueue_script('select2-js', get_template_directory_uri() . '/js/select2.min.js', array('jquery'), null, true);
+
+}
+add_action('wp_enqueue_scripts', 'enqueue_select2');
+
 function motaphoto_enqueue_styles() {
     
     wp_enqueue_style('style', get_stylesheet_uri());
@@ -11,8 +22,13 @@ function motaphoto_enqueue_styles() {
     wp_enqueue_script('photo-nav-script', get_template_directory_uri() . '/js/photo-nav.js', array('jquery'), null, true);
 
     wp_enqueue_script('search-script', get_template_directory_uri() . '/js/search.js', array('jquery'), null, true);
+
 }
 add_action('wp_enqueue_scripts', 'motaphoto_enqueue_styles');
+
+
+
+
 
 //logo
 function motaphoto_custom_logo_setup() {
@@ -56,7 +72,7 @@ function add_thumbnail_url_to_rest_api($data, $post, $request) {
     if (has_post_thumbnail($post->ID)) {
         // Retrieve the URL of the featured image.
         $thumbnail_id = get_post_thumbnail_id($post->ID);
-        $thumbnail_url = wp_get_attachment_image_url($thumbnail_id, 'medium');
+        $thumbnail_url = wp_get_attachment_image_url($thumbnail_id, 'large');
 
         // Add the image URL to the response.
         $data->data['featured_media_src_url'] = $thumbnail_url;
@@ -68,8 +84,42 @@ function add_thumbnail_url_to_rest_api($data, $post, $request) {
     return $data;
 }
 
+// hero//
+
+
+function get_random_photo_url()
+{
+    $photos = new WP_Query(array(
+        'post_type' => 'photo',
+        'posts_per_page' => -1,
+        'fields' => 'ids'
+    ));
+
+    if ($photos->have_posts()) {
+        $photo_urls = array();
+        while ($photos->have_posts()) {
+            $photos->the_post();
+            if (has_post_thumbnail()) {
+                $photo_urls[] = get_the_post_thumbnail_url(get_the_ID(), 'full');
+            }
+        }
+
+        wp_reset_postdata();
+
+
+        if (!empty($photo_urls)) {
+            return $photo_urls[array_rand($photo_urls)];
+        }
+    }
+
+    // Retourne une URL par défaut si aucune image n'est trouvée
+    return 'https://via.placeholder.com/1920x1080';
+}
+
+
 // Apply the filter to the Custom Post Type 'photo'.
 add_filter('rest_prepare_photo', 'add_thumbnail_url_to_rest_api', 10, 3);
+
 
 
 

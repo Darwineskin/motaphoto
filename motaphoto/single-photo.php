@@ -31,7 +31,8 @@ if ( have_posts() ) :
 
             <!-- Bloc bas (118px de hauteur) -->
             <article class="info-footer">
-                <div class="contact-link">
+                <p>Cette photo vous intéresse ?</p>
+                <div class="contact-photo">
                     <a href="#"  data-open-modal="contact" data-reference="<?php the_field('reference'); ?>">Contact</a>
 
                 </div>

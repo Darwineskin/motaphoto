@@ -1,4 +1,6 @@
 
+<p>VOUS AIMEREZ AUSSI</p>
+
 <?php
 
 $categories = wp_get_post_terms(get_the_ID(), 'categorie_photo');
@@ -22,11 +24,11 @@ if ($categories && !is_wp_error($categories)) {
     $related_photos = new WP_Query($args);
 
     if ($related_photos->have_posts()) : ?>
-        <div class="related-photos">
+        <div id="gallery-grid">
             <?php while ($related_photos->have_posts()) : $related_photos->the_post(); ?>
-                <div class="related-photo-item">
+                <div class="gallery-item">
                     <a href="<?php the_permalink(); ?>" class="related-photo-link">
-                        <?php the_post_thumbnail('medium'); ?>
+                        <?php the_post_thumbnail('large'); ?>
                         <div class="photo-overlay">
                             <span class="icon-eye"></span>
                             <span class="icon-fullscreen"></span>
