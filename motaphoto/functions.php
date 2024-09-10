@@ -21,11 +21,14 @@ function motaphoto_enqueue_styles() {
 
     wp_enqueue_script('photo-nav-script', get_template_directory_uri() . '/js/photo-nav.js', array('jquery'), null, true);
 
-    wp_enqueue_script('search-script', get_template_directory_uri() . '/js/search.js', array('jquery'), null, true);
+    wp_enqueue_script('nav-menu', get_template_directory_uri() . '/js/nav.js', array('jquery'), null, true);
+
+    if (is_home()) {
+        wp_enqueue_script('search-script', get_template_directory_uri() . '/js/search.js', array('jquery'), null, true);
+    }
 
 }
 add_action('wp_enqueue_scripts', 'motaphoto_enqueue_styles');
-
 
 
 
@@ -53,8 +56,10 @@ function motaphoto_register_menus() {
 add_action('init', 'motaphoto_register_menus');
 
 
+
+// Contact menu
 function add_contact_button_to_end_of_menu($items, $args) {
-// 
+
 if ($args->theme_location == 'main') {
 $contact_button = '<li class="menu-item contact-button">';
     $contact_button .= '<a href="#" data-open-modal="contact">CONTACT</a>';
@@ -112,13 +117,16 @@ function get_random_photo_url()
         }
     }
 
-    // Retourne une URL par défaut si aucune image n'est trouvée
-    return 'https://via.placeholder.com/1920x1080';
+    return 'No photos available';
 }
 
 
 // Apply the filter to the Custom Post Type 'photo'.
 add_filter('rest_prepare_photo', 'add_thumbnail_url_to_rest_api', 10, 3);
+
+
+
+
 
 
 

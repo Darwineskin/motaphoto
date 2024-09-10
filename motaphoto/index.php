@@ -1,6 +1,5 @@
 <?php get_header(); ?>
 
-
 <?php get_template_part('template-parts/hero'); ?>
 
 <?php
@@ -34,10 +33,21 @@ $formats = get_terms(array(
                 <?php endforeach; ?>
             </select>
         </div>
+        <!-- add date filter -->
+        <div class="filter-date">
+            <select id="date-filter">
+                <option value="desc">TRIER PAR</option>
+                <option value="desc">A partir des plus récentes</option>
+                <option value="asc">A partir des plus anciennes</option>
+            </select>
+        </div>
     </div>
 
     <div id="gallery-grid">
     </div>
 
+    <div id="load-more-container">
+        <button id="load-more">Charger plus</button>
+    </div>
 
 <?php get_footer(); ?>

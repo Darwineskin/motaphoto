@@ -16,8 +16,11 @@
             }
             ?>
         </div>
-
         <nav class="main-navigation">
+            <button class="burger-menu" aria-label="Menu">
+                <img src="<?php echo get_template_directory_uri(); ?>/images/burger.png" class="open-menu" alt="Open menu">
+                <img src="<?php echo get_template_directory_uri(); ?>/images/close.png" class="close-menu" alt="Close menu">
+            </button>
             <?php
             wp_nav_menu(array(
                 'theme_location' => 'main',
