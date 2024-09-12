@@ -5,51 +5,66 @@
 if (have_posts()) :
     while (have_posts()) : the_post(); ?>
 
-        <div class="info-page-container">
+        <section class="container info-page-container">
 
             <!-- containe for left and right -->
-            <section class="info-content">
+            <article class="info-content">
                 <!-- Block left (50%) -->
-                <article class="info-left">
+                <div class="col-left info-left bordered-bottom">
                     <h2 class="entry-title"><?php the_title(); ?></h2>
                     <div class="photo-details">
-                        <p><strong>Référence :</strong> <?php the_field('reference'); ?></p>
-                        <p><strong>Catégorie
-                                :</strong> <?php echo get_the_term_list(get_the_ID(), 'categorie_photo', '', ', '); ?>
+                        <p>Référence : <?php the_field('reference'); ?></p>
+                        <p>Catégorie :
+                            <?php
+                            $categories = get_the_terms(get_the_ID(), 'categorie_photo');
+                            if ($categories && !is_wp_error($categories)) {
+                                $category_names = wp_list_pluck($categories, 'name');
+                                echo implode(', ', $category_names);
+                            }
+                            ?>
                         </p>
-                        <p><strong>Format
-                                :</strong> <?php echo get_the_term_list(get_the_ID(), 'format_photo', '', ', '); ?></p>
-                        <p><strong>Type :</strong> <?php the_field('type'); ?></p>
-                        <p><strong>Année :</strong> <?php echo get_the_date('Y'); ?></p>
+                        <p>Format :
+                            <?php
+                            $formats = get_the_terms(get_the_ID(), 'format_photo');
+                            if ($formats && !is_wp_error($formats)) {
+                                $format_names = wp_list_pluck($formats, 'name');
+                                echo implode(', ', $format_names);
+                            }
+                            ?>
+                        </p>
+                        <p>Type : <?php the_field('type'); ?></p>
+                        <p>Année : <?php echo get_the_date('Y'); ?></p>
                     </div>
-                </article>
+                </div>
 
                 <!-- Block right (50%) -->
-                <article class="info-right">
+                <div class="col-right info-right">
                     <?php if (has_post_thumbnail()) : ?>
                         <?php the_post_thumbnail('large'); ?>
                     <?php endif; ?>
-                </article>
-            </section>
+                </div>
+            </article>
 
-            <!-- Block bottom (118px height) -->
-            <article class="info-footer">
-                <p>Cette photo vous intéresse ?</p>
-                <div class="contact-photo">
+        </section>
+
+        <!-- Block bottom (118px height) -->
+        <section class="container info-footer bordered-top">
+
+            <div class="col-left contact-photo bordered-bottom">
+                <p class="ff-poppins">Cette photo vous intéresse ?</p>
+                <div class="contact-photo-btn">
                     <a href="#" data-open-modal="contact" data-reference="<?php the_field('reference'); ?>">Contact</a>
                 </div>
+            </div>
 
+            <div class="col-right bordered-bottom">
                 <!--navigation thumbnails-->
                 <div class="navigation-links">
                     <?php
                     $prev_post = get_previous_post();
                     $next_post = get_next_post();
                     ?>
-                    <div class="thumbnail-container">
-                        <?php if ($next_post) : ?>
-                            <img src="<?php echo get_the_post_thumbnail_url($next_post->ID, 'thumbnail'); ?>"/>
-                        <?php endif; ?>
-                    </div>
+                    <div class="thumbnail-container"></div>
                     <div class="nav-links-wrapper">
                         <?php if ($prev_post) : ?>
                             <a href="<?php echo get_permalink($prev_post->ID); ?>" class="nav-prev"
@@ -68,9 +83,12 @@ if (have_posts()) :
                         <?php endif; ?>
                     </div>
                 </div>
-            </article>
+            </div>
+        </section>
+        <section class="container recommended-photo">
             <?php get_template_part('template-parts/photo_block'); ?>
-        </div>
+        </section>
+
 
     <?php endwhile;
 else :

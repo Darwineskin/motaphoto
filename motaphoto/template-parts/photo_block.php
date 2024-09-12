@@ -1,5 +1,4 @@
-
-<p>VOUS AIMEREZ AUSSI</p>
+<h3>VOUS AIMEREZ AUSSI</h3>
 
 <?php
 
@@ -41,6 +40,3 @@ if ($categories && !is_wp_error($categories)) {
     wp_reset_postdata();
 }
 ?>
-
-
-

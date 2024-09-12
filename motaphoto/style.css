@@ -7,63 +7,20 @@ Description: motaphoto
 Version: 1.0
 */
 
-@font-face {
-    font-family: 'SpaceMono';
-    src: url('fonts/SpaceMono-Regular.woff2') format('woff2'),
-    url('fonts/SpaceMono-Regular.woff') format('woff'),
-    url('fonts/SpaceMono-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'SpaceMono';
-    src: url('fonts/SpaceMono-BoldItalic.woff2') format('woff2'),
-    url('fonts/SpaceMono-BoldItalic.woff') format('woff'),
-    url('fonts/SpaceMono-BoldItalic.ttf') format('truetype');
-    font-weight: bold;
-    font-style: italic;
-}
-
-
-@font-face {
-    font-family: 'Poppins';
-    src: url('fonts/Poppins-Regular.woff2') format('woff2'),
-    url('fonts/Poppins-Regular.woff') format('woff'),
-    url('fonts/Poppins-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@keyframes slideInFromRight {
-    from {
-        transform: translateX(100%); /* Départ hors de l'écran */
-    }
-    to {
-        transform: translateX(0); /* Position finale, sur l'écran */
-    }
-}
-
-@keyframes slideInFromLeft {
-    from {
-        transform: translateX(0); /* Départ hors de l'écran */
-    }
-    to {
-        transform: translateX(100%); /* Position finale, sur l'écran */
-    }
-}
+@import "css/fonts.css";
+@import "css/keyframes.css";
+@import "css/single-photo.css";
 
 body {
     margin: 0;
     padding: 0;
 }
 
-a {
+p, a, h1, h2, h3 {
     font-family: 'SpaceMono', sans-serif;
 }
 
 h1 {
-    font-family: 'SpaceMono', sans-serif;
     font-weight: 700;
     font-style: italic;
     font-size: 8vw;
@@ -76,21 +33,28 @@ h1 {
 }
 
 h2 {
-    font-family: 'SpaceMono', sans-serif;
     font-weight: 400;
     font-style: italic;
     font-size: 66px;
 }
 
+h3 {
+    font-weight: 400;
+    font-size: 18px;
+}
 
 header {
+    width: 100%;
+    box-shadow: 0px 4px 14px 10px rgba(0, 0, 0, 0.03);
+}
+
+.main-container {
+    height: 80px;
+    max-width: 1440px;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
-    max-width: 1440px;
-    height: 80px;
-    margin: 0 auto;
 }
 
 .burger-menu {
@@ -111,8 +75,6 @@ header {
     background-color: #333;
     transition: all 0.3s ease-in-out;
 }
-
-
 
 .main-menu {
     display: flex;
@@ -150,11 +112,6 @@ header {
     margin-right: 20px;
 }
 
-.contact-button {
-    margin-right: 0 !important;
-
-}
-
 .main-menu a {
     color: #000000;
     text-decoration: none;
@@ -166,6 +123,19 @@ header {
     font-weight: bold;
 }
 
+.contact-button {
+    margin-right: 0 !important;
+}
+
+
+/************** container ****************/
+.container {
+    box-sizing: border-box;
+    overflow: hidden;
+    width: 1148px;
+    margin: auto;
+    position: relative;
+}
 
 /************** hero ****************/
 
@@ -245,130 +215,7 @@ header {
     cursor: pointer;
 }
 
-/****************** single-page **********************/
 
-.info-page-container {
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
-    overflow: hidden;
-    width: 1148px;
-    margin: 0 auto;
-    border-bottom: solid 1px #000000;
-}
-
-.info-content {
-    display: flex;
-    flex: 1;
-    overflow: hidden;
-}
-
-.info-left, .info-right {
-    width: 50%;
-    box-sizing: border-box;
-
-
-}
-
-.info-left {
-    text-transform: uppercase;
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-    border-bottom: #0c0c0c solid 1px;
-    width: 560px;
-    margin-right: 21px;
-    padding-right: 25%;
-
-}
-
-.info-right {
-    display: flex;
-    justify-content: center;
-    align-items: end;
-}
-
-
-.info-right img {
-    width: 100%;
-    height: auto;
-
-}
-
-.info-footer {
-    height: 118px;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-    box-sizing: border-box;
-    flex-shrink: 0;
-    position: relative;
-}
-
-.contact-link a, .navigation-links a {
-    text-decoration: none;
-    color: #000;
-}
-
-
-.contact-photo a {
-    padding: 13px 101px;
-    text-decoration: none;
-    color: #000;
-    background-color: #D8D8D8;
-
-}
-
-
-/****************navigation thumbnail***************/
-
-.navigation-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-    align-items: center;
-}
-
-.thumbnail-container {
-    width: 81px;
-    height: 71px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    margin-bottom: 5px;
-    margin-left: 100px;
-    border: 1px solid transparent;
-}
-
-.thumbnail-container img {
-    width: 81px;
-    height: 71px;
-    max-width: 100%;
-    max-height: 100%;
-    display: block;
-}
-
-.navigation-links {
-    text-align: center;
-    margin-bottom: 0;
-}
-
-.nav-prev img, .nav-next img {
-    margin-left: 30px;
-    height: auto;
-
-}
-
-.nav-links-wrapper {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    width: 100%;
-
-}
 
 /*********** gallery **************/
 
@@ -594,7 +441,6 @@ footer {
     justify-content: center;
     align-items: center;
     width: 100%;
-    max-width: 1440px;
     height: 80px;
     margin: 0 auto;
     border-top: 1px solid #000000;
@@ -630,21 +476,32 @@ footer {
 
 @media (max-width: 1200px) {
 
+    .container {
+        width: 100%;
+        padding: 0 30px;
+    }
+
     #gallery-grid, .gallery-filters {
         width: 100%;
+    }
+    .select2.select2-container.select2-container--default{
+        width: 270px !important;
+    }
+}
+
+@media (max-width: 1200px) and (min-width: 768px) {
+
+    #gallery-grid{
+        width: calc(100% - 60px);
+        margin: 0 auto 50px auto;
+    }
+
+    .gallery-filters{
+        width: calc(100% - 60px);
     }
 }
 
 @media (max-width: 992px) {
-    #gallery-grid {
-        flex-direction: column;
-    }
-
-    .gallery-item {
-        width: 100%;
-        height: 280px;
-        /*padding: 0 40px;*/
-    }
 
     .gallery-filters {
         flex-direction: column;
@@ -674,17 +531,28 @@ footer {
     }
 }
 
-/******************* max 768  ********************/
+/**************************************** max 768  **********************************************/
 @media (max-width: 768px) {
+
+    .custom-logo{
+        margin-left: 50px;
+    }
 
     h1 {
         font-size: 10vw;
         -webkit-text-stroke: 1px #fff;
     }
 
+    h2 {
+        font-size: 46px;
+        font-weight: 400;
+        font-style: italic;
+    }
+
     /* Style du bouton burger */
     .burger-menu {
         display: flex;
+        margin-right: 30px;
     }
 
     .close-menu {
@@ -750,18 +618,40 @@ footer {
         height: auto;
     }
 
+    .gallery-item{
+        width: 100%;
+        padding: 0 30px;
+        height: 70vw;
+    }
+
+    #gallery-grid {
+        flex-direction: column;
+    }
+
+/********************footer 768 *****************************/
+
+    footer{
+        height: 200px;
+    }
+
     .footer-menu {
         flex-direction: column;
-        gap: 10px;
+        align-items: center;
+        padding: 0 50px;
     }
 
     .footer-menu a {
-        font-size: 14px;
+        font-size: 16px;
     }
 }
 
+/************************ 480 ************************/
 
 @media (max-width: 480px) {
+
+    .burger-menu {
+        margin-right:30px;
+    }
 
     .hero {
         height: 70vw;
