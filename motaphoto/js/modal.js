@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     const modal = document.getElementById('contact-modal');
     const openButtons = document.querySelectorAll('[data-open-modal="contact"]');
-    const closeButton = document.querySelector('.contact-modal .close');
+    // const closeButton = document.querySelector('.contact-modal .close');
     const referenceInput = document.querySelector('input[name="photo-reference"]');
 
     // open modal
@@ -11,8 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             referenceInput.value = this.getAttribute('data-reference');
 
-
-            modal.style.display = 'block';
+            modal.style.display = 'block'; // Display modal before running transition
             setTimeout(function() {
                 modal.classList.add('show');
             }, 10);
@@ -20,9 +19,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // close modal
-    closeButton.addEventListener('click', function () {
-        modal.classList.remove('show');
-    });
+    // closeButton.addEventListener('click', function () {
+    //     modal.classList.remove('show');
+    // });
 
     // close modal on click on windows
     window.addEventListener('click', function (event) {

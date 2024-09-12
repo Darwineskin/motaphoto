@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Gérer le clic sur le bouton burger
     burgerMenu.addEventListener('click', function () {
+        console.log('Menu click : isOpen - ' + isOpen);
         if (isOpen) {
             closeMenu();
         } else {
@@ -17,17 +18,19 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     function closeMenu() {
+        console.log('close menu');
         closeMenuButton.style.display = 'none';
         openMenuButton.style.display = 'inline';
         mainMenu.classList.remove('show');
+        mainMenu.classList.remove('showing');
         mainMenu.classList.add('hiding');
 
-        mainMenu.addEventListener('transitionend', () => {
+        setTimeout(() => {
             mainMenu.classList.remove('hiding');
             mainMenu.classList.add('hidden');
-        }, { once: true });
+        }, 200);
 
-        isOpen = !isOpen;
+        isOpen = false;
         burgerMenu.classList.toggle('open');
         body.classList.toggle('no-scroll');
     }
@@ -36,15 +39,16 @@ document.addEventListener('DOMContentLoaded', function () {
         openMenuButton.style.display = 'none';
         closeMenuButton.style.display = 'inline';
         mainMenu.classList.remove('hidden');
+        mainMenu.classList.remove('hiding');
         mainMenu.classList.add('showing'); // Affiche le menu (display: block)
 
         // Petite temporisation pour déclencher l'animation
         setTimeout(() => {
             mainMenu.classList.remove('showing');
             mainMenu.classList.add('show'); // Le menu est maintenant visible
-        }, 10);
+        }, 200);
 
-        isOpen = !isOpen;
+        isOpen = true;
         burgerMenu.classList.toggle('open');
         body.classList.toggle('no-scroll');
     }

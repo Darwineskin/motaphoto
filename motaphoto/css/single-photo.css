@@ -124,6 +124,11 @@
     .recommended-photo #gallery-grid {
         width: 100%;
     }
+
+    .contact-photo{
+        flex-direction: column;
+        justify-content: flex-start;
+    }
 }
 
 @media (max-width: 768px) {
@@ -162,6 +167,23 @@
     .info-right img {
         width: 100%;
         height: auto;
+    }
+
+    .contact-photo{
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+    .col-left{
+        width: 100%;
+        border-bottom: none ;
+    }
+
+     .col-right{
+         border-bottom: none;
+     }
+    .info-footer  {
+        border-bottom: #0c0c0c solid 1px;
+
     }
 
     .info-footer {
