@@ -42,10 +42,10 @@ $formats = get_terms(array(
             </select>
         </div>
     </div>
-
-    <div id="gallery-grid">
+    <div class="container">
+        <div id="gallery-grid">
+        </div>
     </div>
-
     <div id="load-more-container">
         <button id="load-more">Charger plus</button>
     </div>

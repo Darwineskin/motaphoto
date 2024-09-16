@@ -332,19 +332,60 @@ header {
 }
 
 .gallery-item {
+    position: relative;
     width: calc(50% - 10px);
     height: 495px;
     box-sizing: border-box;
     overflow: hidden;
 }
 
-.gallery-item img {
+.gallery-item .gi-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
 
 }
+
+.overlay {
+    display:none;
+    position:absolute;
+    background-color: rgba(0, 0, 0, 0.6);
+    width: 100%;
+    height: 100%;
+    top:0;
+    left:0;
+}
+
+.gallery-item:hover .overlay {
+    display: block;
+}
+
+.overlay .icon-fullscreen {
+    display: flex;
+    justify-content: flex-end;
+    padding: 15px;
+
+
+}
+.overlay .icon-eye {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height: 75%;
+}
+
+.overlay .overlay-info{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-family: 'SpaceMono', sans-serif;
+}
+
+
 
 /*************** Load more ****************/
 
@@ -643,12 +684,12 @@ footer {
 
     .gallery-item{
         width: 100%;
-        padding: 0 30px;
         height: 70vw;
     }
 
     #gallery-grid {
         flex-direction: column;
+
     }
 
     .wpcf7 {
@@ -663,6 +704,16 @@ footer {
         padding:15px;
     }
 
+
+    .overlay {
+        /*padding: 15px;*/
+    }
+
+    .overlay .icon-fullscreen {
+        margin-top: 7px;
+        margin-right: 7px;
+        padding: 0;
+    }
 
 /********************footer 768 *****************************/
 
@@ -733,4 +784,6 @@ footer {
     .wpcf7 textarea {
           padding:15px;
     }
+
+
 }

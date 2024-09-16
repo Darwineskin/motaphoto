@@ -27,12 +27,25 @@ if ($categories && !is_wp_error($categories)) {
             <?php while ($related_photos->have_posts()) : $related_photos->the_post(); ?>
                 <div class="gallery-item">
                     <a href="<?php the_permalink(); ?>" class="related-photo-link">
-                        <?php the_post_thumbnail('large'); ?>
-                        <div class="photo-overlay">
-                            <span class="icon-eye"></span>
-                            <span class="icon-fullscreen"></span>
-                        </div>
+                        <?php the_post_thumbnail('large', 'class=gi-image'); ?>
                     </a>
+                    <div class="overlay">
+                        <div class="icon-fullscreen"><img src="<?php echo get_template_directory_uri(); ?>/images/icon_fullscreen.png" alt="fullscreen"></div>
+                        <div class="icon-eye">
+                            <a href="<?php the_permalink(); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/icon_eye.png" alt="eye"></a>
+                        </div>
+                        <div class="overlay-info">
+                            <div class="overlay-ref"><?php the_field('reference'); ?></div>
+                            <div class="overlay-cat"><?php
+                                $categories = get_the_terms(get_the_ID(), 'categorie_photo');
+                                if ($categories && !is_wp_error($categories)) {
+                                    $category_names = wp_list_pluck($categories, 'name');
+                                    echo implode(', ', $category_names);
+                                }
+                                ?>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             <?php endwhile; ?>
         </div>

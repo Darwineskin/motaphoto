@@ -1,7 +1,7 @@
-
 <?php
 
-function enqueue_select2() {
+function enqueue_select2()
+{
     // include CSS Select2
     wp_enqueue_style('select2-css', get_template_directory_uri() . '/css/select2.min.css', array(), '1.0.1');
 
@@ -10,13 +10,15 @@ function enqueue_select2() {
     wp_enqueue_script('select2-js', get_template_directory_uri() . '/js/select2.min.js', array('jquery'), null, true);
 
 }
+
 add_action('wp_enqueue_scripts', 'enqueue_select2');
 
-function motaphoto_enqueue_styles() {
-    
+function motaphoto_enqueue_styles()
+{
+
     wp_enqueue_style('style', get_stylesheet_uri());
 
-    
+
     wp_enqueue_script('custom-modal-script', get_template_directory_uri() . '/js/modal.js', array('jquery'), null, true);
 
     wp_enqueue_script('photo-nav-script', get_template_directory_uri() . '/js/photo-nav.js', array('jquery'), null, true);
@@ -25,54 +27,62 @@ function motaphoto_enqueue_styles() {
 
     if (is_home()) {
         wp_enqueue_script('search-script', get_template_directory_uri() . '/js/search.js', array('jquery'), null, true);
-    }
 
+    }
+    wp_localize_script('search-script', 'wpData', array(
+        'templateDirectoryUri' => get_template_directory_uri(),
+    ));
 }
+
 add_action('wp_enqueue_scripts', 'motaphoto_enqueue_styles');
 
 
-
-
 //logo
-function motaphoto_custom_logo_setup() {
+function motaphoto_custom_logo_setup()
+{
     $defaults = array(
-        'height'      => 14,
-        'width'       => 216,
+        'height' => 14,
+        'width' => 216,
         'flex-height' => true,
-        'flex-width'  => true,
+        'flex-width' => true,
     );
     add_theme_support('custom-logo', $defaults);
 }
+
 add_action('after_setup_theme', 'motaphoto_custom_logo_setup');
 
 
 //  menus navigation
-function motaphoto_register_menus() {
+function motaphoto_register_menus()
+{
     register_nav_menus(array(
         'main' => __('Main Menu', 'motaphoto'),
-        'footer'  => __('Footer Menu', 'motaphoto'),
+        'footer' => __('Footer Menu', 'motaphoto'),
     ));
 }
+
 add_action('init', 'motaphoto_register_menus');
 
 
-
 // Contact menu
-function add_contact_button_to_end_of_menu($items, $args) {
+function add_contact_button_to_end_of_menu($items, $args)
+{
 
-if ($args->theme_location == 'main') {
-$contact_button = '<li class="menu-item contact-button">';
-    $contact_button .= '<a href="#" data-open-modal="contact">CONTACT</a>';
-    $contact_button .= '</li>';
-$items .= $contact_button; // end position
+    if ($args->theme_location == 'main') {
+        $contact_button = '<li class="menu-item contact-button">';
+        $contact_button .= '<a href="#" data-open-modal="contact">CONTACT</a>';
+        $contact_button .= '</li>';
+        $items .= $contact_button; // end position
+    }
+    return $items;
 }
-return $items;
-}
+
 add_filter('wp_nav_menu_items', 'add_contact_button_to_end_of_menu', 10, 2);
 
 ///////////////Add Api wordpress to filter
 
-function add_thumbnail_url_to_rest_api($data, $post, $request) {
+function add_thumbnail_url_to_rest_api($data, $post, $request)
+{
     // Check if the post has a featured image.
     if (has_post_thumbnail($post->ID)) {
         // Retrieve the URL of the featured image.
@@ -124,6 +134,24 @@ function get_random_photo_url()
 // Apply the filter to the Custom Post Type 'photo'.
 add_filter('rest_prepare_photo', 'add_thumbnail_url_to_rest_api', 10, 3);
 
+
+// add categories photo response
+function add_category_names_to_rest_response($data, $post, $context)
+{
+
+    $categories = get_the_terms(get_the_ID(), 'categorie_photo');
+    if ($categories && !is_wp_error($categories)) {
+        $category_names = wp_list_pluck($categories, 'name');
+        $data->data['category_names'] = implode(', ', $category_names);
+    }
+
+
+
+    return $data;
+}
+
+// Add the filter to include the category names in the REST API post response
+add_filter('rest_prepare_photo', 'add_category_names_to_rest_response', 10, 3);
 
 
 

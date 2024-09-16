@@ -64,12 +64,22 @@ jQuery(document).ready(function($) {
                     totalPages = parseInt(xhr.getResponseHeader('X-WP-TotalPages'), 10); // total page
 
                 photos.forEach(photo => {
+                    console.log(photo);
                     const galleryItem = $('<div></div>');
                     galleryItem.addClass('gallery-item');
                     galleryItem.html(`
                             <a href="${photo.link}">
-                                <img src="${photo.featured_media_src_url}" alt="${photo.title.rendered}">
-                            </a>`);
+                                <img class="gi-image" src="${photo.featured_media_src_url}" alt="${photo.title.rendered}">
+                            </a>
+                            <div class="overlay">
+                                <div class="icon-fullscreen"><img src="${wpData.templateDirectoryUri}/images/icon_fullscreen.png" alt="fullscreen"></div>
+                                <div class="icon-eye"><a href="${photo.link}"><img src="${wpData.templateDirectoryUri}/images/icon_eye.png" alt="eye"></a></div>
+                                <div class="overlay-info">
+                                    <div class="overlay-ref">${photo.acf.reference}</div>
+                                    <div class="overlay-cat">${photo.category_names}</div>
+                                </div>
+                            </div>`
+                    );
                     galleryGrid.append(galleryItem);
                 });
 
