@@ -25,12 +25,13 @@ if ($categories && !is_wp_error($categories)) {
     if ($related_photos->have_posts()) : ?>
         <div id="gallery-grid">
             <?php while ($related_photos->have_posts()) : $related_photos->the_post(); ?>
-                <div class="gallery-item">
+                <div class="gallery-item" data-post-id="<?php the_ID(); ?>">
                     <a href="<?php the_permalink(); ?>" class="related-photo-link">
                         <?php the_post_thumbnail('large', 'class=gi-image'); ?>
                     </a>
                     <div class="overlay">
-                        <div class="icon-fullscreen"><img src="<?php echo get_template_directory_uri(); ?>/images/icon_fullscreen.png" alt="fullscreen"></div>
+                        <div class="icon-fullscreen"><img src="<?php echo get_template_directory_uri(); ?>/images/icon_fullscreen.png" alt="fullscreen">
+                        </div>
                         <div class="icon-eye">
                             <a href="<?php the_permalink(); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/icon_eye.png" alt="eye"></a>
                         </div>

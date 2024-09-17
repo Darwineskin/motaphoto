@@ -64,9 +64,9 @@ jQuery(document).ready(function($) {
                     totalPages = parseInt(xhr.getResponseHeader('X-WP-TotalPages'), 10); // total page
 
                 photos.forEach(photo => {
-                    console.log(photo);
                     const galleryItem = $('<div></div>');
                     galleryItem.addClass('gallery-item');
+                    galleryItem.attr('data-post-id', photo.id);
                     galleryItem.html(`
                             <a href="${photo.link}">
                                 <img class="gi-image" src="${photo.featured_media_src_url}" alt="${photo.title.rendered}">
@@ -89,10 +89,8 @@ jQuery(document).ready(function($) {
                 if (paged > totalPages) {
                     $('#load-more').hide(); // hide button load more
                 }
-            },
-            error: function() {
-                console.log('Erreur lors du chargement des photos.');
             }
+
         });
     }
 
