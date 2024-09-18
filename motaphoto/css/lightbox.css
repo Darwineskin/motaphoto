@@ -18,42 +18,74 @@
     overflow: auto;
 }
 
+.lightbox-prev,
 .lightbox-next {
-    width: 40px;
-    height: 28px;
-    position: fixed;
-    top: 50%;
-    z-index: 11;
-    right: 0;
+    display: flex;
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 150px;
+    display: flex;
+    align-items: center;
+    transition: background-image 0.3s ease-in-out, width 0.3s ease-in-out, height 0.3s ease-in-out;
+    background-repeat: no-repeat;
 }
 
-.lightbox-prev {
-    width: 40px;
-    height: 28px;
-    position: fixed;
-    top: 50%;
-    z-index: 11;
+.lightbox-prev span,
+.lightbox-next span {
+    color: white;
+    padding: 0 35px;
+    font-family: 'SpaceMono', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
 }
+
+/* Button Hover */
+.lightbox-prev:hover span,
+.lightbox-next:hover span {
+    font-weight: 700;
+}
+
+/* Arrow */
+.lightbox-prev {
+    background-image: url('../images/arrowL_small.svg');
+    background-position: left center;
+
+}
+
+.lightbox-next {
+    background-image: url('../images/arrowR_small.svg');
+    background-position: right center;
+    flex-direction: row-reverse;
+}
+
+.lightbox-prev:hover {
+    background-image: url('../images/arrowL.svg');
+}
+
+.lightbox-next:hover {
+    background-image: url('../images/arrowR.svg');
+}
+
+
 
 .lightbox-close {
+    background: url(../images/close_lightbox.png) center center / 22px 22px transparent no-repeat;
     width: 40px;
     height: 40px;
     position: fixed;
     right: 20px;
     top: 20px;
     z-index: 12;
+    border: none;
+    cursor: pointer;
 }
 
-/*laisse la place pour les fleches et/ou prevoit une marge image*/
-.lightbox-container {
-    margin-left: 50px;
-}
 
 .lightbox-container img {
     max-width: 100%;
     height: auto;
 }
-
 
 
 .lightbox-info {
@@ -67,3 +99,101 @@
     text-transform: uppercase;
 }
 
+/********** MEDIA QUERIES **********/
+
+@media screen and (max-width: 768px) {
+    .lightbox-close {
+        width: 22px;
+        height: 22px;
+    }
+
+    .lightbox-container {
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin:0;
+        width: 100%;
+        height: auto;
+        min-height: auto;
+    }
+
+    .lightbox-prev,
+    .lightbox-next {
+        margin: 100px 0 20px;
+        width: 50%;
+        height: 30px;
+        background-size: contain;
+        position: relative;
+        background-size: contain;
+        z-index: 11; /
+    }
+
+    .lightbox-prev {
+        left: 10px;
+
+        order: 0;
+    }
+
+    .lightbox-next {
+        right: 10px; 
+        order: 1;
+    }
+
+    .lightbox-prev:hover {
+        background-image: url('../images/arrowL_small.svg');
+    }
+
+    .lightbox-next:hover {
+        background-image: url('../images/arrowR_small.svg');
+    }
+
+    .lightbox-prev span,
+    .lightbox-next span {
+        display: none;
+    }
+
+    .img-container {
+        display: flex;
+        flex-direction: column;
+        order:2;
+    }
+
+    .lightbox-img {
+        margin: 0 auto;
+        width: 100%;
+        height: auto;
+    }
+
+    .lightbox-info {
+        margin: 0 auto;
+        width: 80%;
+        text-align: center;
+    }
+
+    .lightbox-ref,
+    .lightbox-cat {
+        font-size: 1em;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .lightbox-close {
+        width: 22px;
+        height: 22px;
+    }
+
+
+    .lightbox-prev img,
+    .lightbox-next img {
+        width: 20px;
+        height: 15px;
+    }
+
+    .img-container .lightbox-info {
+        font-size: 0.7em;
+    }
+
+    .lightbox-ref,
+    .lightbox-cat {
+        font-size: 1.5em;
+    }
+}
