@@ -1,21 +1,22 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const navLinks = document.querySelectorAll('.navigation-links a');
-    const thumbnailContainer = document.querySelector('.thumbnail-container');
+jQuery(document).ready(function ($) {
+    const $navLinks = $('.navigation-links a');
+    const $thumbnailContainer = $('.thumbnail-container');
 
-    navLinks.forEach(link => {
-        link.addEventListener('mouseover', function() {
-            const thumbnailUrl = link.getAttribute('data-thumbnail');
+    $navLinks.each(function () {
+        const $link = $(this);
+
+        $link.on('mouseover', function () {
+            const thumbnailUrl = $link.attr('data-thumbnail');
             if (thumbnailUrl) {
-                thumbnailContainer.innerHTML = ''; // clear
+                $thumbnailContainer.empty(); // Clear the container
 
-                const img = document.createElement('img');
-                img.src = thumbnailUrl;
-                thumbnailContainer.appendChild(img);
+                const $img = $('<img>').attr('src', thumbnailUrl);
+                $thumbnailContainer.append($img);
             }
         });
 
-        link.addEventListener('mouseout', function() {
-            thumbnailContainer.innerHTML = ''; // clear but save space
+        $link.on('mouseout', function () {
+            $thumbnailContainer.empty(); // Clear but save space
         });
     });
 });

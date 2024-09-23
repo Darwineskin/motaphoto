@@ -1,7 +1,7 @@
 /*
 Theme Name: motaphoto
 Theme URI: http://motaphoto.local
-Author: Darwine
+Author: Climent Alexandra
 Author URI: http://motaphoto.com
 Description: motaphoto
 Version: 1.0
@@ -34,6 +34,7 @@ h1 {
 }
 
 h2 {
+    margin:0;
     font-weight: 400;
     font-style: italic;
     font-size: 66px;
@@ -70,7 +71,6 @@ header {
 
 }
 .entry-content{
-
     width: 100%;
     max-width: 1148px;
     margin:auto;
@@ -189,6 +189,7 @@ header {
     visibility: hidden;
     transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
     display: none;
+
 }
 
 /* Show modal */
@@ -210,6 +211,7 @@ header {
     opacity: 0;
     transform: translateY(-50px);
     transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    border: 5px solid #000000;
 }
 
 /* Show modal content */
@@ -226,7 +228,7 @@ header {
 
 
 
-/*********** gallery **************/
+/*********** gallery and filters **************/
 
 .gallery-filters {
     display: flex;
@@ -366,9 +368,8 @@ header {
     display: flex;
     justify-content: flex-end;
     padding: 15px;
-
-
 }
+
 .overlay .icon-eye {
     display:flex;
     justify-content: center;
@@ -386,10 +387,7 @@ header {
     font-family: 'SpaceMono', sans-serif;
 }
 
-
-
 /*************** Load more ****************/
-
 
 #load-more-container {
     text-align: center;
@@ -418,9 +416,6 @@ header {
     background-color: #000;
     color: #fff;
 }
-
-/*********** Lightbox***************/
-
 
 /********* contact modal header grid ************/
 .image-grid {
@@ -455,7 +450,6 @@ header {
 /* custom contact-modal */
 .wpcf7 {
     margin: 50px 167px 0 167px;
-
 }
 
 .wpcf7 input[type="text"],
@@ -468,7 +462,6 @@ header {
     border-radius: 8px;
     box-sizing: border-box;
     font-size: 12px;
-
 }
 
 .wpcf7 textarea {
@@ -496,7 +489,9 @@ header {
 .single-image-mobile {
     display: none;
 }
+
 /************** footer ***************/
+
 footer {
     display: flex;
     justify-content: center;
@@ -522,11 +517,7 @@ footer {
     font-size: 16px;
 }
 
-
-
-
 /******************************MEDIA**********************************/
-
 
 @media (min-width: 1200px) {
 
@@ -592,7 +583,8 @@ footer {
     }
 }
 
-/**************************************** max 768  **********************************************/
+/********************** max 768 *************************/
+
 @media (max-width: 768px) {
 
     .custom-logo{
@@ -635,29 +627,29 @@ footer {
         z-index: 1;
         background-color: red;
         height: calc(100vh - 80px);
-        transform: translateX(100%); /* Menu caché à droite */
+        transform: translateX(100%); /* Menu hide on right */
         transition: transform 0.5s ease;
     }
 
-    /* Affiche le menu pendant l'animation d'ouverture */
+    /* show  menu during the opening animation. */
     .main-menu.showing {
         display: flex;
         transform: translateX(100%);
     }
 
-    /* Affiche le menu une fois l'animation terminée */
+    /* Display the menu once the animation is complete */
     .main-menu.show {
         display: flex;
         transform: translateX(0);
     }
 
-    /* Affiche le menu pendant l'animation de fermeture */
+    /* Display the menu during the closing animation */
     .main-menu.hiding {
         display: flex;
         transform: translateX(100%);
     }
 
-    /* Masque le menu une fois l'animation terminée */
+    /* Hide the menu once the animation is complete */
     .main-menu.hidden {
         display: none;
     }
@@ -690,7 +682,6 @@ footer {
 
     #gallery-grid {
         flex-direction: column;
-
     }
 
     .wpcf7 {
@@ -705,20 +696,15 @@ footer {
         padding:15px;
     }
 
-
-    .overlay {
-        /*padding: 15px;*/
-    }
-
     .overlay .icon-fullscreen {
         margin-top: 7px;
         margin-right: 7px;
         padding: 0;
     }
 
-/********************footer 768 *****************************/
+/**footer 768px **/
 
-    footer{
+    footer {
         height: 200px;
     }
 
@@ -760,24 +746,22 @@ footer {
 
     .image-container {
         position: relative;
-        overflow: hidden; /* Cache l'excès de l'image */
+        overflow: hidden;
         width: 100%;
         padding-top: 20px;
     }
 
     .single-image-mobile {
-        display: block; /* Affiche l'image sur mobile */
+        display: block;
         position: relative;
-        left: 50%; /* Positionne l'image au centre */
-        transform: translateX(-50%); /* Centre l'image */
-        width: 100%; /* L'image dépasse du conteneur */
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
         height: auto;
     }
 
     .single-image-mobile {
-        display: block; /* Affiche une seule image sur mobile */
-
-
+        display: block;
     }
 
     .wpcf7 input[type="text"],
@@ -785,6 +769,4 @@ footer {
     .wpcf7 textarea {
           padding:15px;
     }
-
-
 }

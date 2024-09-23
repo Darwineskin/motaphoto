@@ -48,7 +48,7 @@
     height: 118px;
     display: flex;
     justify-content: space-between;
-    /*align-items: center;*/
+
 }
 
 .contact-link a, .navigation-links a {
@@ -69,6 +69,11 @@
     text-decoration: none;
     color: #000;
     background-color: #D8D8D8;
+}
+
+.contact-photo-btn a:hover {
+    background-color: #000000;
+    color : #ffffff;
 }
 
 .navigation-links {
@@ -119,6 +124,9 @@
    width: 100%;
 }
 
+
+/**************** Media *************************/
+
 @media (max-width: 1200px) and (min-width: 768px) {
 
     .recommended-photo #gallery-grid {
@@ -137,17 +145,14 @@
         border-top: #0c0c0c solid 1px;
     }
 
-    /*.info-page-container {*/
-    /*    width: calc(100% - 100px); !* Add 50px margin on each side *!*/
-    /*}*/
 
     .info-content {
-        flex-direction: column-reverse; /* Stack content vertically */
+        flex-direction: column-reverse;
 
     }
 
     .info-left, .info-right {
-        width: 100%; /* Full width for both sections */
+        width: 100%;
         margin-right: 0;
         padding-right: 0;
         border-bottom: none;
@@ -187,8 +192,8 @@
     }
 
     .info-footer {
-        flex-direction: column; /* Stack the footer elements vertically */
-        height: auto; /* Allow the height to adjust dynamically */
+        flex-direction: column; /
+        height: auto;
         padding-bottom: 30px !important;
     }
 

@@ -54,7 +54,7 @@ function motaphoto_custom_logo_setup()
 add_action('after_setup_theme', 'motaphoto_custom_logo_setup');
 
 
-//  menus navigation
+//  menu navigation
 function motaphoto_register_menus()
 {
     register_nav_menus(array(
@@ -81,7 +81,7 @@ function add_contact_button_to_end_of_menu($items, $args)
 
 add_filter('wp_nav_menu_items', 'add_contact_button_to_end_of_menu', 10, 2);
 
-///////////////Add Api wordpress to filter
+//Add Api Wordpress to filter
 
 function add_thumbnail_url_to_rest_api($data, $post, $request)
 {
@@ -94,15 +94,13 @@ function add_thumbnail_url_to_rest_api($data, $post, $request)
         // Add the image URL to the response.
         $data->data['featured_media_src_url'] = $thumbnail_url;
     } else {
-        // Si le post n'a pas d'image mise en avant, ajoutez une valeur nulle
+        // If the post does not have a featured image, add a null value
         $data->data['featured_media_src_url'] = null;
     }
-
     return $data;
 }
 
-// hero//
-
+// hero page//
 
 function get_random_photo_url()
 {
@@ -120,19 +118,14 @@ function get_random_photo_url()
                 $photo_urls[] = get_the_post_thumbnail_url(get_the_ID(), 'full');
             }
         }
-
         wp_reset_postdata();
-
 
         if (!empty($photo_urls)) {
             return $photo_urls[array_rand($photo_urls)];
         }
     }
-
     return 'No photos available';
 }
-
-
 // Apply the filter to the Custom Post Type 'photo'.
 add_filter('rest_prepare_photo', 'add_thumbnail_url_to_rest_api', 10, 3);
 
@@ -140,18 +133,13 @@ add_filter('rest_prepare_photo', 'add_thumbnail_url_to_rest_api', 10, 3);
 // add categories photo response
 function add_category_names_to_rest_response($data, $post, $context)
 {
-
     $categories = get_the_terms(get_the_ID(), 'categorie_photo');
     if ($categories && !is_wp_error($categories)) {
         $category_names = wp_list_pluck($categories, 'name');
         $data->data['category_names'] = implode(', ', $category_names);
     }
-
-
-
     return $data;
 }
-
 // Add the filter to include the category names in the REST API post response
 add_filter('rest_prepare_photo', 'add_category_names_to_rest_response', 10, 3);
 

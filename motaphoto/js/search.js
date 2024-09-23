@@ -1,7 +1,7 @@
 jQuery(document).ready(function($) {
     const galleryGrid = $('#gallery-grid');
     const categoryFilter = $("#category-filter").select2({
-        minimumResultsForSearch: Infinity, /* Désactive la barre de recherche si non nécessaire */
+        minimumResultsForSearch: Infinity, /* disable search bar */
     });
 
     const formatFilter = $("#format-filter").select2({

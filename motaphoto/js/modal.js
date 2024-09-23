@@ -1,42 +1,37 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const modal = document.getElementById('contact-modal');
-    const openButtons = document.querySelectorAll('[data-open-modal="contact"]');
-    // const closeButton = document.querySelector('.contact-modal .close');
-    const referenceInput = document.querySelector('input[name="photo-reference"]');
+jQuery(document).ready(function ($) {
+    const $modal = $('#contact-modal');
+    const $openButtons = $('[data-open-modal="contact"]');
+    const $referenceInput = $('input[name="photo-reference"]');
 
     // open modal
-    openButtons.forEach(function(button) {
-        button.addEventListener('click', function (event) {
+    $openButtons.each(function () {
+        $(this).on('click', function (event) {
             event.preventDefault();
 
-            referenceInput.value = this.getAttribute('data-reference');
+            $referenceInput.val($(this).attr('data-reference'));
 
-            modal.style.display = 'block'; // Display modal before running transition
-            setTimeout(function() {
-                modal.classList.add('show');
+            $modal.show(); // Display modal before running transition
+            setTimeout(function () {
+                $modal.addClass('show');
             }, 10);
         });
     });
 
-    // close modal
-    // closeButton.addEventListener('click', function () {
-    //     modal.classList.remove('show');
-    // });
-
-    // close modal on click on windows
-    window.addEventListener('click', function (event) {
-        if (event.target == modal) {
-            modal.classList.remove('show');
+    // close modal on click on window
+    $(window).on('click', function (event) {
+        if (event.target === $modal[0]) {
+            $modal.removeClass('show');
         }
     });
 
-    // hide modal when close
-    modal.addEventListener('transitionend', function () {
-        if (!modal.classList.contains('show')) {
-            modal.style.display = 'none';
+    // hide modal when transition ends
+    $modal.on('transitionend', function () {
+        if (!$modal.hasClass('show')) {
+            $modal.hide();
         }
     });
 });
+
 
 
 

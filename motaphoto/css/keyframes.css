@@ -1,17 +1,17 @@
 @keyframes slideInFromRight {
     from {
-        transform: translateX(100%); /* Départ hors de l'écran */
+        transform: translateX(100%);
     }
     to {
-        transform: translateX(0); /* Position finale, sur l'écran */
+        transform: translateX(0);
     }
 }
 
 @keyframes slideInFromLeft {
     from {
-        transform: translateX(0); /* Départ hors de l'écran */
+        transform: translateX(0);
     }
     to {
-        transform: translateX(100%); /* Position finale, sur l'écran */
+        transform: translateX(100%);
     }
 }
